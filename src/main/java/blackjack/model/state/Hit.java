@@ -49,18 +49,6 @@ public class Hit implements HandState {
         return false;
     }
 
-    private GameResult judgeWithScore(Hand hand, Hand otherHand) {
-        if (hand.calculateTotalScore() == otherHand.calculateTotalScore()) {
-            return GameResult.DRAW;
-        }
-
-        if (hand.calculateTotalScore() > otherHand.calculateTotalScore()) {
-            return GameResult.WIN;
-        }
-
-        return GameResult.LOSE;
-    }
-
     private HandState checkBlackjack(Hand hand) {
         if (hand.size() == BLACKJACK_CHECK_SIZE) {
             return new Blackjack();
