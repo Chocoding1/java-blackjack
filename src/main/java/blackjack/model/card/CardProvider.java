@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 
 public class CardProvider {
 
-    private static final int INIT_CARDS_START_IDX = 0;
-    private static final int INIT_CARDS_END_IDX = 2;
+    private static final int INIT_CARDS_START_INDEX = 0;
+    private static final int INIT_CARDS_END_INDEX = 2;
 
     private final Queue<Card> deck = new LinkedList<>();
 
@@ -44,7 +44,7 @@ public class CardProvider {
     }
 
     private void drawTwoCard(User user) {
-        for (int i = INIT_CARDS_START_IDX; i < INIT_CARDS_END_IDX; i++) {
+        for (int i = INIT_CARDS_START_INDEX; i < INIT_CARDS_END_INDEX; i++) {
             drawOneCard(user);
         }
     }
