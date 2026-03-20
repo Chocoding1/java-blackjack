@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Deck {
 
@@ -36,11 +37,15 @@ public class Deck {
 
     private void initDeck() {
         List<Card> cards = Arrays.stream(Rank.values())
-                .flatMap(rank -> Arrays.stream(Suit.values())
-                        .map(suit -> new Card(rank, suit)))
+                .flatMap(this::createCardsByRank)
                 .collect(Collectors.toCollection(ArrayList::new));
         Collections.shuffle(cards);
         this.deck.addAll(cards);
+    }
+
+    private Stream<Card> createCardsByRank(Rank rank) {
+        return Arrays.stream(Suit.values())
+                .map(suit -> new Card(rank, suit));
     }
 
     private void drawTwoCard(User user) {
