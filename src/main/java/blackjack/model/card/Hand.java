@@ -10,9 +10,9 @@ import java.util.stream.Collectors;
 
 public class Hand {
 
-    private static final int BLACKJACK_SCORE = 21;
-    private static final int ACE_SCORE_ONE = 1;
-    private static final int ACE_SCORE_ELEVEN = 11;
+    private static final int BLACKJACK_RANK = 21;
+    private static final int ACE_RANK_ONE = 1;
+    private static final int ACE_RANK_ELEVEN = 11;
 
     private final List<Card> cards;
     private HandState handState;
@@ -83,9 +83,9 @@ public class Hand {
     }
 
     private static int calculateAceScore(int totalScore) {
-        if (totalScore + ACE_SCORE_ELEVEN > BLACKJACK_SCORE) {
-            return ACE_SCORE_ONE;
+        if (totalScore + ACE_RANK_ELEVEN > BLACKJACK_RANK) {
+            return ACE_RANK_ONE;
         }
-        return ACE_SCORE_ELEVEN;
+        return ACE_RANK_ELEVEN;
     }
 }
