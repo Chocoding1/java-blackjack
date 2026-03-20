@@ -2,9 +2,11 @@ package blackjack.model.bet;
 
 public class BetAmount {
 
+    private static final int MINIMUM_BET_AMOUNT = 1;
+
     static final String ERROR_EMPTY_INPUT = "입력값은 공백일 수 없습니다.";
     static final String ERROR_BET_AMOUNT_NOT_INTEGER = "배팅 금액은 숫자 형태로 입력해야 합니다 : %s";
-    static final String ERROR_BET_AMOUNT_NOT_POSITIVE = "배팅 금액은 1원 이상이어야 합니다 : %d";
+    static final String ERROR_BET_AMOUNT_NOT_POSITIVE = "배팅 금액은 " + MINIMUM_BET_AMOUNT + "원 이상이어야 합니다 : %d";
 
     private final int amount;
 
