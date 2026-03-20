@@ -10,24 +10,15 @@ import java.util.List;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
-public class CardProvider {
+public class Deck {
 
     private static final int INIT_CARDS_START_INDEX = 0;
     private static final int INIT_CARDS_END_INDEX = 2;
 
     private final Queue<Card> deck = new LinkedList<>();
 
-    public CardProvider() {
+    public Deck() {
         initDeck();
-    }
-
-    private void initDeck() {
-        List<Card> cards = Arrays.stream(Rank.values())
-                .flatMap(rank -> Arrays.stream(Suit.values())
-                        .map(suit -> new Card(rank, suit)))
-                .collect(Collectors.toCollection(ArrayList::new));
-        Collections.shuffle(cards);
-        this.deck.addAll(cards);
     }
 
     public void drawInitCards(Users users) {
@@ -41,6 +32,15 @@ public class CardProvider {
             initDeck();
         }
         user.draw(deck.poll());
+    }
+
+    private void initDeck() {
+        List<Card> cards = Arrays.stream(Rank.values())
+                .flatMap(rank -> Arrays.stream(Suit.values())
+                        .map(suit -> new Card(rank, suit)))
+                .collect(Collectors.toCollection(ArrayList::new));
+        Collections.shuffle(cards);
+        this.deck.addAll(cards);
     }
 
     private void drawTwoCard(User user) {

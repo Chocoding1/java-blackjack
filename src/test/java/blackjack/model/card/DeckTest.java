@@ -9,20 +9,20 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class CardProviderTest {
+class DeckTest {
 
     @Test
     @DisplayName("딜러 및 플레이어에게 초기 카드 2장 정상 배분")
     void test_provide_init_cards() {
         // given
-        CardProvider cardProvider = new CardProvider();
+        Deck deck = new Deck();
 
         List<Player> players = List.of(new Player("pobi"), new Player("james"));
         Dealer dealer = new Dealer();
         Users users = new Users(players, dealer);
 
         // when
-        cardProvider.drawInitCards(users);
+        deck.drawInitCards(users);
 
         // then
         assertThat(players).allSatisfy(player ->
@@ -34,9 +34,9 @@ class CardProviderTest {
     @DisplayName("카드 추가 지급 성공")
     void test_provide_one_card_success() {
         Player player = new Player("pobi");
-        CardProvider cardProvider = new CardProvider();
+        Deck deck = new Deck();
 
-        cardProvider.drawOneCard(player);
+        deck.drawOneCard(player);
 
         assertThat(player.cards().size()).isEqualTo(1);
     }

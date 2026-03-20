@@ -4,7 +4,7 @@ import static blackjack.util.ExceptionHandler.retryUntilSuccess;
 
 import blackjack.model.bet.BetAmount;
 import blackjack.model.bet.BetAmounts;
-import blackjack.model.card.CardProvider;
+import blackjack.model.card.Deck;
 import blackjack.model.command.HitCommand;
 import blackjack.model.gameresult.ProfitResult;
 import blackjack.model.user.User;
@@ -17,10 +17,10 @@ import java.util.function.Supplier;
 
 public class BlackjackGame {
 
-    private final CardProvider cardProvider;
+    private final Deck deck;
 
-    public BlackjackGame(CardProvider cardProvider) {
-        this.cardProvider = cardProvider;
+    public BlackjackGame(Deck deck) {
+        this.deck = deck;
     }
 
     public Users createUsers(Supplier<String> readUsername) {
@@ -39,7 +39,7 @@ public class BlackjackGame {
     }
 
     public void drawInitCards(Users users) {
-        cardProvider.drawInitCards(users);
+        deck.drawInitCards(users);
     }
 
     public void hitPlayers(Users users, Function<User, String> readHitCommand,
@@ -52,7 +52,7 @@ public class BlackjackGame {
     public void hitDealer(Users users, Runnable printDealerHit) {
         User dealer = users.getDealer();
         while (dealer.isHitAvailable()) {
-            cardProvider.drawOneCard(dealer);
+            deck.drawOneCard(dealer);
             printDealerHit.run();
         }
         dealer.stay();
@@ -69,7 +69,7 @@ public class BlackjackGame {
     private void hitPlayer(User player, Function<User, String> readHitCommand, Consumer<User> printPlayerCards,
                            Runnable printCantHit) {
         while (retryUntilSuccess(() -> checkY(player, readHitCommand)) && isHitAvailable(player, printCantHit)) {
-            cardProvider.drawOneCard(player);
+            deck.drawOneCard(player);
             printPlayerCards.accept(player);
         }
         player.stay();
